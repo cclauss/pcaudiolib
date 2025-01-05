@@ -1,0 +1,31 @@
+name: build
+on:
+  push:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:  # TODO: Add all the following OSes...
+        # os: [macos-13, macos-latest, ubuntu-latest, windows-latest, windows-2025]
+        os: [macos-13, ubuntu-latest]  # macOS on Intel and Ubuntu builds succeed.
+    runs-on: ${{ matrix.os }}
+    steps:
+      # On macOS install https://www.gnu.org/software/automake
+      - if: runner.os == 'macOS'
+        run: brew install automake
+      # - if: runner.os == 'Windows'
+      #  shell: bash  # Not pwsh on Windows
+      #  # https://community.chocolatey.org/packages/automake Does not exist!!
+      #  # run: choco install automake
+      #  # run: choco install make  # GNU make
+      - uses: actions/checkout@v4
+      - shell: bash  # Not pwsh on Windows
+        run: |
+          ./autogen.sh
+          ./configure
+          make
+          sudo make install
