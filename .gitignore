@@ -33,7 +33,6 @@ autom4te.cache/
 ChangeLog
 compile
 config.h
-config.h.in
 config.h.in~
 config.log
 config.*
@@ -44,3 +43,4 @@ missing
 stamp-h1
 libtool
 ltmain.sh
+build/
