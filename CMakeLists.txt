@@ -10,11 +10,10 @@ configure_file(config.h.in config.h)
 # Include the source directory
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src/include")
 
-# Define options for audio backends
-option(WITH_ALSA "Enable ALSA audio output support" OFF)
-option(WITH_PULSEAUDIO "Enable PulseAudio audio output support" OFF)
-option(WITH_COREAUDIO "Enable CoreAudio audio output support (macOS)" ON)
-option(WITH_OSS "Enable OSS audio output support" OFF)
+option(WITH_ALSA "Enable ALSA audio output support" OFF) # Linux - Alsa
+option(WITH_PULSEAUDIO "Enable PulseAudio audio output support" OFF) # Linux - PulseAudio
+option(WITH_COREAUDIO "Enable CoreAudio audio output support (macOS)" ON) # macOS, iOS - CoreAudio
+option(WITH_OSS "Enable OSS audio output support" ON) # Windows - Open Sound System
 
 # Collect all source files in the src directory
 file(GLOB_RECURSE SOURCES "${SRC_DIR}/*.c")
