@@ -1,0 +1,4 @@
+#cmakedefine WITH_ALSA 0
+#cmakedefine WITH_PULSEAUDIO 0
+#cmakedefine WITH_COREAUDIO 0
+#cmakedefine WITH_OSS 0
