@@ -39,7 +39,7 @@ jobs:
         if: matrix.name == 'linux-arm64'
       - name: Build
         run: |
-          cmake -B bulid -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=_install
+          cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=_install
           cmake --build build --config Release
           cmake --install build --config Release
           tree _install
