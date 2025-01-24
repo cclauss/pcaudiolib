@@ -52,7 +52,7 @@ if(WITH_OSS)
 endif()
 
 # Add sources and create a static library
-add_library(${PROJECT_NAME} STATIC ${SOURCES})
+add_library(${PROJECT_NAME} SHARED ${SOURCES})
 
 # Add the configuration header to the target
 target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")
@@ -70,3 +70,10 @@ message(STATUS "  WITH_ALSA: ${WITH_ALSA}")
 message(STATUS "  WITH_PULSEAUDIO: ${WITH_PULSEAUDIO}")
 message(STATUS "  WITH_COREAUDIO: ${WITH_COREAUDIO}")
 message(STATUS "  WITH_OSS: ${WITH_OSS}")
+
+
+install(TARGETS ${PROJECT_NAME} DESTINATION lib)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/include/ DESTINATION include)
+
+# cmake -B build . -DCMAKE_INSTALL_PREFIX=_install 
+# cmake --build build
