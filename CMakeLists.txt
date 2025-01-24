@@ -42,6 +42,19 @@ if(NOT WITH_PULSEAUDIO OR NOT UNIX)
     list(FILTER SOURCES EXCLUDE REGEX "pulseaudio.c")
 endif()
 
+# Oss Integration
+if(WITH_OSS AND WIN32)
+    list(FILTER SOURCES EXCLUDE REGEX "oss.c")
+    # See https://github.com/microsoft/DirectXTK/wiki/Audio#using-the-vcpkg-c-library-manager
+    target_compile_definitions(${PROJECT_NAME} PRIVATE USING_XAUDIO2_REDIST)
+    if (NOT EXISTS "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include/xaudio2redist/xaudio2.h")
+        message(FATAL_ERROR "VCPKG port 'xaudio2redist' required for DirectX Tool Kit for Audio on Windows 7")
+    endif()
+    target_include_directories(${PROJECT_NAME} PRIVATE ${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include/xaudio2redist)
+    target_link_directories(${PROJECT_NAME} PRIVATE ${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib)
+    target_link_libraries(${PROJECT_NAME} PRIVATE xaudio2_9redist.lib)
+endif()
+
 # ALSA Integration
 if(WITH_ALSA)
     find_package(ALSA REQUIRED)

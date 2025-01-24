@@ -38,6 +38,11 @@ jobs:
           echo "CC=aarch64-linux-gnu-gcc" >> $GITHUB_ENV
           echo "CXX=aarch64-linux-gnu-g++" >> $GITHUB_ENV
         if: matrix.name == 'linux-arm64'
+
+      - name: Add directxtk for xaudio2
+        run: vcpkg install directxtk[xaudio2redist]:x64-windows
+        if: matrix.platform == 'windows-2022'
+
       - name: Build
         run: |
           cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=_install ${{ matrix.extra-cmake-args }}
