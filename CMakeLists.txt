@@ -13,7 +13,7 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src/include")
 # Define options for audio backends
 option(WITH_ALSA "Enable ALSA audio output support" OFF)
 option(WITH_PULSEAUDIO "Enable PulseAudio audio output support" OFF)
-option(WITH_COREAUDIO "Enable CoreAudio audio output support (macOS)" OFF)
+option(WITH_COREAUDIO "Enable CoreAudio audio output support (macOS)" ON)
 option(WITH_OSS "Enable OSS audio output support" OFF)
 
 # Collect all source files in the src directory
@@ -26,19 +26,19 @@ if(NOT WIN32)
     list(FILTER SOURCES EXCLUDE REGEX "windows.c")
 endif()
 
-if(NOT WITH_ALSA)
+if(NOT WITH_ALSA OR NOT UNIX)
     list(FILTER SOURCES EXCLUDE REGEX "alsa.c")
 endif()
 
-if(NOT WITH_COREAUDIO)
+if(NOT WITH_COREAUDIO OR NOT APPLE)
     list(FILTER SOURCES EXCLUDE REGEX "coreaudio.c")
 endif()
 
-if(NOT WITH_OSS)
+if(NOT WITH_OSS OR NOT UNIX)
     list(FILTER SOURCES EXCLUDE REGEX "oss.c")
 endif()
 
-if(NOT WITH_PULSEAUDIO)
+if(NOT WITH_PULSEAUDIO OR NOT UNIX)
     list(FILTER SOURCES EXCLUDE REGEX "pulseaudio.c")
 endif()
 
