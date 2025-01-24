@@ -42,5 +42,5 @@ jobs:
           cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=_install
           cmake --build build --config Release
           cmake --install build --config Release
-          tree _install
+          ls -R _install
         shell: bash
