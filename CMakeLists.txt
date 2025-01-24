@@ -19,9 +19,27 @@ option(WITH_OSS "Enable OSS audio output support" OFF)
 # Collect all source files in the src directory
 file(GLOB_RECURSE SOURCES "${SRC_DIR}/*.c")
 
-# Exclude windows.c if not on Windows platform
+
+# Exclude platform-specific files based on the OS
+
 if(NOT WIN32)
     list(FILTER SOURCES EXCLUDE REGEX "windows.c")
+endif()
+
+if(NOT WITH_ALSA)
+    list(FILTER SOURCES EXCLUDE REGEX "alsa.c")
+endif()
+
+if(NOT WITH_COREAUDIO)
+    list(FILTER SOURCES EXCLUDE REGEX "coreaudio.c")
+endif()
+
+if(NOT WITH_OSS)
+    list(FILTER SOURCES EXCLUDE REGEX "oss.c")
+endif()
+
+if(NOT WITH_PULSEAUDIO)
+    list(FILTER SOURCES EXCLUDE REGEX "pulseaudio.c")
 endif()
 
 # ALSA Integration
