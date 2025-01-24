@@ -10,17 +10,17 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: "macos-latest" # macOS arm64
+          - platform: "macos-14" # macOS arm64
             name: "macos-arm64"
-          - platform: "macos-latest" # macOS x86-64
+          - platform: "macos-14" # macOS x86-64
             name: "macos-x86-64"
           - platform: "ubuntu-22.04" # Linux x86_64
             name: "linux-x86-64"
-          - platform: "macos-latest" # Linux arm64
+          - platform: "ubuntu-22.04" # Linux arm64
             name: "linux-x86-64"
-          - platform: "windows-latest" # Windows x86_64
+          - platform: "windows-2022" # Windows x86_64
             name: "windows-x86-64"
-          - platform: "windows-latest" # Windows arm64
+          - platform: "windows-2022" # Windows arm64
             name: "windows-arm64"
 
 
