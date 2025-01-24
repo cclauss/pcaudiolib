@@ -32,6 +32,7 @@ endif()
 
 if(NOT WITH_COREAUDIO OR NOT APPLE)
     list(FILTER SOURCES EXCLUDE REGEX "coreaudio.c")
+    list(FILTER SOURCES EXCLUDE REGEX "TPCircularBuffer")
 endif()
 
 if(NOT WITH_OSS OR NOT UNIX)
